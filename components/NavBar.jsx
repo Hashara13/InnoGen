@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { GrGoogle } from "react-icons/gr";
 import {
   signIn,
   signOut,
@@ -50,7 +51,7 @@ const NavBar = () => {
             </button>
             <Link href="/userProfile">
               <Image
-                src="/assets/images/logo-black.png"
+                src={session?.user.image}
                 alt="username"
                 className="ml-2 rounded-full mr-5"
                 width={35}
@@ -66,8 +67,9 @@ const NavBar = () => {
                   type="button"
                   onClick={() => signIn(provider.id)}
                   key={provider.name}
-                  className="mr-5 rounded-full  bg-gray-400 py-2 px-5 text-black transition-all hover:bg-gray-600 hover:text-white text-center text-m font-inter font-medium flex items-center"
+                  className="mr-6 rounded-full  bg-gray-400 py-2 px-5 text-black transition-all hover:bg-gray-600 hover:text-white text-center text-m font-inter font-medium flex items-center"
                 >
+                  <GrGoogle className="mr-2"/>
 Get Started                </button>
               ))}
           </>
@@ -85,8 +87,8 @@ Get Started                </button>
               onClick={() => {
                 setDropdown((prev) => !prev);
               }}
-              src="/assets/images/logo-black.png"
-            />
+              src={session?.user.image}
+              />
 
             {dropdown && (
               <div className="absolute right-0 top-full mt-3 w-full p-5 text-gray-100 rounded-lg bg-gray-200 min-w-[210px] flex flex-col gap-2 justify-end items-end">
