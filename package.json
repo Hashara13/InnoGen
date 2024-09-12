@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.1",
+    "@coreui/icons-react": "^2.3.0",
     "bcrypt": "^5.1.1",
     "mongoose": "^8.6.2",
     "next": "14.2.10",
