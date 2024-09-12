@@ -7,6 +7,8 @@ import Image from "next/image";
 const NavBar = () => {
   const isUserLoggedIn = true;
   const[providers, setProviders]=useState(null);
+  const[dropdown, setDropdown]=useState(false);
+
 
   useEffect(()=>{
     const setProviders=async()=>{
@@ -70,17 +72,41 @@ const NavBar = () => {
         )}
       </div>
 
-      <div className="sm:hidden flex relative">
+      <div className="sm:hidden flex relative ml-auto">
         {isUserLoggedIn ? (
           <div className="flex">
                  <Image
          alt="username"
-         className="mr-20 rounded-full mr-5"
+         className="mr-8 rounded-full"
          width={35}
          height={35}
-          onClick={()=>{}}
+          onClick={()=>{setDropdown((prev)=>!prev)}}
           src="/assets/images/logo-black.png"
         />
+
+        {dropdown &&  (
+          <div className="absolute right-0 top-full mt-3 w-full p-5 text-gray-100 rounded-lg bg-gray-200 min-w-[210px] flex flex-col gap-2 justify-end items-end">
+            <Link
+            href="/profile"
+            className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+            onClick={()=>setDropdown(false)}>
+              Profile
+            </Link>
+            <Link
+            href="/add"
+            className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+            onClick={()=>setDropdown(false)}>
+              Add New
+            </Link>
+            <button
+             type="button"
+             onClick={()=>{setDropdown(false); signOut();}}
+            className="text-sm font-inter text-gray-700 hover:text-gray-500 font-medium"
+           >
+             Log Out
+             </button>
+          </div>
+        )}
             </div>
         ):(
           <>
