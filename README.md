@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# InnoGen
 
-## Getting Started
+**InnoGen** is a Next.js application built for Software Development enthusiasts to discover, create, and share Keywords, Joggles, and Roadmaps related to Software Development Technologies. It’s designed to streamline the learning process and help developers stay up to date with the latest trends and tools.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Discover**: Explore a vast collection of keywords, joggles, and roadmaps related to various software development technologies.
+- **Create**: Add your own keywords and roadmaps to the platform, share your knowledge, and contribute to the community.
+- **Share**: Collaborate and exchange ideas with others by sharing your discoveries and creations.
+- **Next.js**: Powered by the popular Next.js framework, offering a fast and optimized user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js (React framework)
+- **Backend**: Node.js with Express
+- **Database**: MongoDB
+- **Styling**: Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Hashara13/InnoGen.git
 
-To learn more about Next.js, take a look at the following resources:
+2. Install dependencies:
+   ```bash
+   npm install
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Run the development server:
+   ```bash
+   npm run dev
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# Usage
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. To discover new keywords, joggles, and roadmaps, navigate to the Discover section.
+2. To create and add your own, use the Create feature to contribute.
+3. Share your favorite finds with the Share feature and help grow the community.
