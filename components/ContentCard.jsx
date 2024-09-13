@@ -1,5 +1,6 @@
 "use client";
-
+import { BiCopy } from "react-icons/bi";
+import { AiOutlineCheck } from "react-icons/ai";
 import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -15,20 +16,7 @@ const ContentCard = ({ keyword, handleTagClick, handleEdit, handleDelete }) => {
   };
 
   return (
-    // <div className='border p-4 rounded shadow-md bg-white'>
-    //   <h2 className='text-lg font-bold'>{keyword.keyword1}</h2>
-    //   <p className='text-gray-500'>Tech: {keyword.tech}</p>
-    //   <p className='text-gray-500'>Roadmap: {keyword.roadmap}</p>
-    //   <p className='text-gray-500'>Tag: {keyword.tag}</p>
-    //   <button
-    //     className='text-blue-500 underline mt-2'
-    //     onClick={() => handleTagClick(keyword.tag)}
-    //   >
-    //     View related tags
-    //   </button>
-    // </div>
-
-    <div className="flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit">
+    <div className="flex-1 break-inside-avoid rounded-lg border between mb-3 border-gray-700 bg-gray-700 p-6 pb-4 shadow-lg backdrop-blur-lg w-full h-fit md:w-[360px]">
       <div className="flex justify-between items-start gap-5">
         <div
           className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
@@ -42,37 +30,32 @@ const ContentCard = ({ keyword, handleTagClick, handleEdit, handleDelete }) => {
             className="rounded-full object-contain"
           />
           <div className="flex flex-col">
-            <h3 className=" font-semibold text-gray-900">
+            <h3 className="font-semibold text-white">
               {keyword.creator.username}
             </h3>
-            <p className="font-inter text-sm text-gray-500">
+            <p className="font-inter text-sm text-gray-400">
               {keyword.creator.email}
             </p>
           </div>
-          <div
-            className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;"
-            onClick={handleCopy}
-          >
-            <Image
-              src={
-                copied === keyword.keyword1
-                  ? "/assets/icons/tick.svg"
-                  : "/assets/icons/copy.svg"
-              }
-              alt={copied === keyword.keyword1 ? "tick_icon" : "copy_icon"}
-              width={12}
-              height={12}
-            />
-          </div>
-          <p className='my-4 text-sm text-gray-700'>{keyword.keyword1}</p>
+        </div>
+        <div
+          className="w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer"
+          onClick={handleCopy}
+        >
+          {copied === keyword.keyword1 ? (
+            <AiOutlineCheck size={12} color="white" />
+          ) : (
+            <BiCopy size={12} color="white" />
+          )}
+        </div>
+      </div>
+      <p className="my-4 text-sm text-gray-300">{keyword.keyword1}</p>
       <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
+        className="font-inter text-sm text-blue-400 cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(keyword.tag)}
       >
         #{keyword.tag}
       </p>
-        </div>
-      </div>
     </div>
   );
 };
