@@ -23,6 +23,6 @@ const TechSchema = new Schema({
   }
 });
 
-const Tech = models.Prompt || model('tech', TechSchema);
+const Tech = models.Tech || model('Tech', TechSchema);
 
 export default Tech;

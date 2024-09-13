@@ -16,20 +16,31 @@ const CreateNew = () => {
     console.log('Creating keyword:', keyword);
     setSubmitting(true);
 try{
-const  response=await fetch('/api/tech/new',{
-  method:"POST",
-  body:JSON.stringify({
-    tech:keyword.tech,
-    userID:session?.user.id,
-    keyword1:keyword.keyword1,
-    roadmap:keyword.keyword1
-  })
-})
-if(!response.ok){
-  router.push('/');
-}
-}catch(error){
-  console.log(error)
+  const response = await fetch('/api/tech/new', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      tech: keyword.tech,
+      userId: session?.user.id,
+      keyword1: keyword.keyword1,
+      roadmap: keyword.roadmap,
+      tag: keyword.tag,  
+    }),
+  });
+  if (response.ok) {
+    console.log('Navigating to homepage...');
+    router.push('/');
+  } else {
+    console.error('Failed to create keyword');
+  }
+} catch (error) {
+  console.error('Error:', error);
+  return new Response("Failed to create a new tech keyword", { status: 500 });
+
+
+
 }finally{
   setSubmitting(false);
 
