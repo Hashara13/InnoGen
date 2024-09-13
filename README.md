@@ -2,6 +2,8 @@
 
 **InnoGen** is a Next.js application built for Software Development enthusiasts to discover, create, and share Keywords, Joggles, and Roadmaps related to Software Development Technologies. It’s designed to streamline the learning process and help developers stay up to date with the latest trends and tools.
 
+![Alt text](/public/assets/images/post.png)
+
 ## Features
 
 - **Discover**: Explore a vast collection of keywords, joggles, and roadmaps related to various software development technologies.
