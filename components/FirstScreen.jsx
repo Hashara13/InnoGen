@@ -30,20 +30,35 @@ const FirstScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [searchedResults, setSearchedResults] = useState([]);
+  const [allTechs, setAllTechs] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
   const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearchText(value);
-    const searchResult = filterPrompts(value);
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
+
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
     setSearchedResults(searchResult);
   };
 
   const filterPrompts = (searchText) => {
-    if (!searchText) return keywords;
-
-    return keywords.filter((keyword) =>
-      [keyword.creator, keyword.tech, keyword.tag, keyword.keyword, keyword.roadmap]
-        .some((field) => field.toLowerCase().includes(searchText.toLowerCase()))
+    const regex = new RegExp(searchText, "i"); 
+    return allTechs.filter(
+      (item) =>
+        regex.test(item.creator.username) ||
+        regex.test(item.tag) ||
+        regex.test(item.keyword1)
     );
   };
 
@@ -56,6 +71,7 @@ const FirstScreen = () => {
       const data = await response.json();
       console.log("Fetched data from API:", data);
       setKeywords(data);
+      setAllTechs(data);
       setSearchedResults(data); 
     } catch (error) {
       console.error("Fetch error:", error);
