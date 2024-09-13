@@ -24,40 +24,13 @@ const Form = ({ type, keyword, setKeyword, submitting, handleSubmit }) => {
           </span>
           <input
             value={keyword.tech}
-            onChange={(e) => setKeyword({ ...keyword, tag: e.target.value })}
+            onChange={(e) => setKeyword({ ...keyword, tech: e.target.value })}
             type='text'
           
             required
             className='w-full flex rounded-lg mt-2 p-3 text-sm text-gray-200 outline-0 bg-gray-800 shadow-[inset_10px_-50px_94px_0_rgba(199,199,199,0.2)]'          />
         </label>
-        <label>
-          <span className='font-semibold text-base text-gray-300'>
-            Your Own Keywords
-          </span>
-
-          <textarea
-            value={keyword.prompt}
-            onChange={(e) => setKeyword({ ...keyword, prompt: e.target.value })}
-            placeholder='Write your keywords here'
-            required
-            className='w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-200 outline-0  bg-gray-700'
-          />
-        </label>
-
-        <label>
-          <span className='font-semibold text-base text-gray-300'>
-            Add Roadmaps
-          </span>
-
-          <textarea
-            value={keyword.roadmap}
-            onChange={(e) => setKeyword({ ...keyword, prompt: e.target.value })}
-            placeholder='Enter roadmaps'
-            required
-            className='w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-200 outline-0  bg-gray-700'
-          />
-        </label>
-
+        
         <label>
         <span className='font-semibold text-base text-gray-300'>
         Add Tags here {" "}
@@ -74,6 +47,34 @@ const Form = ({ type, keyword, setKeyword, submitting, handleSubmit }) => {
             className='w-full flex rounded-lg mt-2 p-3 text-sm text-gray-200 outline-0 bg-gray-800 shadow-[inset_10px_-50px_94px_0_rgba(199,199,199,0.2)]'          />
           
         </label>
+        <label>
+          <span className='font-semibold text-base text-gray-300'>
+            Your Own Keywords
+          </span>
+
+          <textarea
+            value={keyword.keyword1}
+            onChange={(e) => setKeyword({ ...keyword, keyword1: e.target.value })}
+            placeholder='Write your keywords here'
+            required
+            className='w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-200 outline-0  bg-gray-700'
+          />
+        </label>
+
+        <label>
+          <span className='font-semibold text-base text-gray-300'>
+            Add Roadmaps
+          </span>
+
+          <textarea
+            value={keyword.roadmap}
+            onChange={(e) => setKeyword({ ...keyword, roadmap: e.target.value })}
+            placeholder='Enter roadmaps'
+            required
+            className='w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-200 outline-0  bg-gray-700'
+          />
+        </label>
+
 
         <div className='flex-end mx-3 mb-5 gap-4'>
           <Link href='/' className='text-gray-500 text-sm'>
@@ -83,7 +84,7 @@ const Form = ({ type, keyword, setKeyword, submitting, handleSubmit }) => {
           <button
             type='submit'
             disabled={submitting}
-            className='px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white'
+            className='px-5 py-1.5 text-m  rounded-full text-white'
           >
             {submitting ? `${type}ing...` : type}
           </button>
