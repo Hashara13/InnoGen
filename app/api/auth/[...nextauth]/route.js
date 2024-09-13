@@ -2,6 +2,8 @@ import NextAuth from "next-auth/next";
 import GoogleProvider from 'next-auth/providers/google';
 import { connectDB } from '@utils/database';
 import User from "@models/user";
+require('dotenv').config();
+
 
 const handler = NextAuth({
   providers: [
@@ -10,7 +12,7 @@ const handler = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     })
   ],
-
+  callbacks: {
     async session({ session }) {
       await connectDB();
       const sessionUser = await User.findOne({ email: session.user.email });
@@ -19,30 +21,31 @@ const handler = NextAuth({
         session.user.id = sessionUser._id.toString();
       }
 
-      return session;  // Make sure to return the session object
+      return session;  
     },
 
-    async signIn({ profile }) {
+    async signIn({ account, profile, user, credentials }) {
       try {
-        await connectDB();  // Ensure the DB is connected before proceeding
+        console.log("Profile:", profile); 
+        await connectDB();  
 
         const userExist = await User.findOne({ email: profile.email });
 
-        if (!userExist) {
+        if (!userExist) {  
           await User.create({
             email: profile.email,
-            username: profile.name.toLowerCase(), // Updated to use profile.name
-            image: profile.picture, // Use profile.picture for the image
+            username: profile.name.replace(" ", "").toLowerCase(),
+            image: profile.picture,
           });
         }
 
         return true;
       } catch (error) {
-        console.log("Error signing in:", error);
-        return false;
-      }
-    
-  }
-});
+        console.log("Error checking if user exists: ", error.message);
+                return false;
+              }
+            },
+          }
+        })
 
 export { handler as GET, handler as POST };
