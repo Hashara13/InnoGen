@@ -33,7 +33,7 @@ const Profile = () => {
   }, [session?.user.id]);
   
   const handleEdit = (keyword) => {
-    // router.push(`/update-prompt?id=${post._id}`);
+    router.push(`/update-keyword?id=${keyword._id}`);
   };
 
   const handleDelete = async (keyword) => {
