@@ -13,8 +13,8 @@ export const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "InnoGen",
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // useNewUrlParser: true,
+      // useUnifiedTopology: true,
     });
 
     isConnected = true;
