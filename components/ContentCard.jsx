@@ -8,6 +8,9 @@ import { usePathname, useRouter } from "next/navigation";
 import { MdContentCopy } from "react-icons/md";
 
 const ContentCard = ({ keyword, handleTagClick, handleEdit, handleDelete }) => {
+  const { data: session } = useSession();
+  const pathName = usePathname();
+  const router = useRouter();
   const [copied, setCopied] = useState("");
   const handleCopy = () => {
     setCopied(keyword.keyword1);
@@ -56,6 +59,22 @@ const ContentCard = ({ keyword, handleTagClick, handleEdit, handleDelete }) => {
       >
         #{keyword.tag}
       </p>
+      {session?.user.id === keyword.creator._id && pathName === "/userProfile" && (
+        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
+          <p
+            className='font-inter text-sm bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent cursor-pointer'
+            onClick={handleEdit}
+          >
+            Edit
+          </p>
+          <p
+            className='font-inter text-sm bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent cursor-pointer'
+            onClick={handleDelete}
+          >
+            Delete
+          </p>
+        </div>
+      )}
     </div>
   );
 };
