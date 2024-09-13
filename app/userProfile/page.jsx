@@ -23,7 +23,7 @@ const Profile = () => {
       } catch (error) {
         console.error("Fetch error:", error);
       } finally {
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false); 
       }
     };
   
@@ -37,10 +37,22 @@ const Profile = () => {
   };
 
   const handleDelete = async (keyword) => {
-    // const hasConfirmed = confirm(
-    //   "Are you sure you want to delete this prompt?"
-    // );
-  };
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete ?"   );
+      if (hasConfirmed) {
+        try {
+          await fetch(`/api/tech/${keyword._id.toString()}`, {
+            method: "DELETE",
+          });
+  
+          const filteredPosts = keywords.filter((item) => item._id !== keyword._id);
+  
+          setKeywords(filteredKeywords); 
+                } catch (error) {
+          console.log(error);
+        }
+      }
+    };
 
 return (
   <UserProfile

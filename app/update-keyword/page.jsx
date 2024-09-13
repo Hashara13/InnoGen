@@ -9,7 +9,7 @@ const EditNew = () => {
   const { data: session } = useSession();
 
   const [keyword, setKeyword] = useState({ keyword1: '', tag: '', roadmap:'' ,tech:''});
-  const [submitting, setSubmitting] = useState(false);
+  const [submitting, setIsSubmitting] = useState(false);
   const searchParams = useSearchParams();
   const techId = searchParams.get("id");
 
@@ -29,50 +29,40 @@ const EditNew = () => {
     if (techId) getTechDetails();
   }, [techId]);
 
-  const  createKeyword = async (e) => {
+  const updateKeyword= async (e) => {
     e.preventDefault();
-    console.log('Creating keyword:', keyword);
-    setSubmitting(true);
-try{
-  const response = await fetch('/api/tech/new', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      tech: keyword.tech,
-      userId: session?.user.id,
-      keyword1: keyword.keyword1,
-      roadmap: keyword.roadmap,
-      tag: keyword.tag,  
-    }),
-  });
-  if (response.ok) {
-    console.log('Navigating to homepage...');
-    router.push('/');
-  } else {
-    console.error('Failed to create keyword');
-  }
-} catch (error) {
-  console.error('Error:', error);
-  return new Response("Failed to create a new tech keyword", { status: 500 });
+    setIsSubmitting(true);
 
+    if (!techId) return alert("Missing !");
 
+    try {
+      const response = await fetch(`/api/tech/${techId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          keyword1: keyword.keyword1,
+          tag: keyword.tag,
+          roadmap: keyword.roadmap,
+          tech: keyword.tech,
+        }),
+      });
 
-}finally{
-  setSubmitting(false);
-
-}
-
+      if (response.ok) {
+        router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <Form
-      type="Create"
+      type="Edit"
       keyword={keyword}
       setKeyword={setKeyword}
       submitting={submitting}
-      handleSubmit={createKeyword}
+      handleSubmit={updateKeyword}
     />
   );
 };

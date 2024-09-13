@@ -1,19 +1,32 @@
 import Tech from "@models/tech";
 import { connectDB } from "@utils/database";
+import { ObjectId } from "mongodb";
 
+// export const GET = async (request, { params }) => {
+//     try {
+//         await connectDB()
+
+//         const tech = await Tech.findById(params.id).populate("creator")
+//         if (!prompt) return new Response("tech Not Found", { status: 404 });
+
+//         return new Response(JSON.stringify(tech), { status: 200 })
+
+//     } catch (error) {
+//         return new Response("Internal Server Error", { status: 500 });
+//     }
+// }
 export const GET = async (request, { params }) => {
     try {
-        await connectDB()
+        await connectDB();
 
-        const tech = await Tech.findById(params.id).populate("creator")
-        if (!prompt) return new Response("tech Not Found", { status: 404 });
+        const tech = await Tech.findById(params.id).populate("creator");
+        if (!tech) return new Response("Tech Not Found", { status: 404 });
 
-        return new Response(JSON.stringify(tech), { status: 200 })
-
+        return new Response(JSON.stringify(tech), { status: 200 });
     } catch (error) {
         return new Response("Internal Server Error", { status: 500 });
     }
-}
+};
 
 export const PATCH = async (request, { params }) => {
     const { keyword1, tag ,roadmap,tech} = await request.json();
@@ -42,11 +55,16 @@ export const PATCH = async (request, { params }) => {
 export const DELETE = async (request, { params }) => {
     try {
         await connectDB()
-
-        await Tech.findByIdAndRemove(params.id);
-
+        const tech = await Tech.findById(params.id);
+        if (!tech) {
+          return new Response("Tech not found", { status: 404 });
+        }
+    
+        await tech.remove();
+    
         return new Response("Tech deleted successfully", { status: 200 });
-    } catch (error) {
+      } catch (error) {
+        console.error("Error deleting Tech:", error);
         return new Response("Error deleting Tech", { status: 500 });
-    }
-};
+      }
+    };
