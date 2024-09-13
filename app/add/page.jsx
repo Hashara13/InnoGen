@@ -5,6 +5,9 @@ import { useRouter } from 'next/navigation';
 import Form from '@components/Form';
 
 const CreateNew = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+
   const [keyword, setKeyword] = useState({ keyword1: '', tag: '', roadmap:'' ,tech:''});
   const [submitting, setSubmitting] = useState(false);
 
@@ -23,7 +26,7 @@ const  response=await fetch('/api/tech/new',{
   })
 })
 if(!response.ok){
-  Router.push('/');
+  router.push('/');
 }
 }catch(error){
   console.log(error)
